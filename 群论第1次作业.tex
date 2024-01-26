@@ -1,0 +1,369 @@
+\documentclass[reqno,a4paper,12pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm,geometry,xcolor,soul,graphicx}
+\usepackage{titlesec}
+\usepackage{enumerate}
+\usepackage{lipsum}
+\usepackage{listings}
+\RequirePackage[most]{tcolorbox}
+\usepackage{braket}
+\allowdisplaybreaks[4] %align公式跨页
+\usepackage{xeCJK}
+\setCJKmainfont{Kai}
+\geometry{left=0.7in, right=0.7in, top=1in, bottom=1in}
+
+\renewcommand{\baselinestretch}{1.3}
+
+\title{群论
+作业}
+\author{董建宇 ~~ 202328000807038}
+
+\begin{document}
+
+\maketitle
+\titleformat{\section}[hang]{\small}{\thesection}{0.8em}{}{}
+\titleformat{\subsection}[hang]{\small}{\thesubsection}{0.8em}{}{}
+
+\textbf{1.}找到相似变换矩阵$M$使
+\[
+	M^{-1}\left(
+	\begin{matrix}
+		0 & -\cos\theta & \sin\theta\sin\varphi \\
+		\cos\theta & 0 & -\sin\theta\cos\varphi \\
+		-\sin\theta\sin\varphi & \sin\theta\cos\varphi & 0
+	\end{matrix}
+	\right)M = \left(
+	\begin{matrix}
+		0 & -1 & 0 \\
+		1 & 0 & 0 \\
+		0 & 0 & 0
+	\end{matrix}
+	\right)
+\]
+\begin{tcolorbox}[breakable, colback = black!5!white, colframe = black]
+由于矩阵$M$可逆，等式两侧左乘$M$，并将矩阵$M$按列分块，即$M = (\vec{m}_1 ~~ \vec{m}_2 ~~ \vec{m}_3)$。则题目等式化为：
+\begin{align*}
+	\left(
+	\begin{matrix}
+		0 & -\cos\theta & \sin\theta\sin\varphi \\
+		\cos\theta & 0 & -\sin\theta\cos\varphi \\
+		-\sin\theta\sin\varphi & \sin\theta\cos\varphi & 0
+	\end{matrix}
+	\right)
+	\left(
+	\begin{matrix}
+		\vec{m}_1 & \vec{m}_2 & \vec{m}_3
+	\end{matrix}
+	\right)
+	=&
+	\left(
+	\begin{matrix}
+		\vec{m}_1 & \vec{m}_2 & \vec{m}_3
+	\end{matrix}
+	\right)
+	\left(
+	\begin{matrix}
+		0 & -1 & 0 \\
+		1 & 0 & 0 \\
+		0 & 0 & 0
+	\end{matrix}
+	\right) \\
+	=&
+	\left(
+	\begin{matrix}
+		\vec{m}_2 & -\vec{m}_1 & 0
+	\end{matrix}
+	\right)
+\end{align*}
+对于每个列向量，记作：$\vec{m}_i = (a_i ~~ b_i ~~ c_i)^T$。考虑$\vec{m}_3$有：
+\[
+	\left(
+	\begin{matrix}
+		0 & -\cos\theta & \sin\theta\sin\varphi \\
+		\cos\theta & 0 & -\sin\theta\cos\varphi \\
+		-\sin\theta\sin\varphi & \sin\theta\cos\varphi & 0
+	\end{matrix}
+	\right)
+	\left(
+	\begin{matrix}
+		a_3 \\
+		b_3 \\ 
+		c_3
+	\end{matrix}
+	\right)
+	=
+	\left(
+	\begin{matrix}
+		0 \\ 
+		0 \\ 
+		0
+	\end{matrix}
+	\right)
+\]
+可得：
+\begin{align*}
+	a_3=& \tan\theta\cos\varphi ~ c_3; \\
+	b_3=& \tan\theta\sin\varphi ~ c_3.
+\end{align*}
+考虑归一化$\vert a_3 \vert^2 + \vert b_3 \vert^2 + \vert c_3 \vert^2 = 1$，并选取$c_3$的相位因子为$0$，可得：
+\[
+	\vec{m}_3 = (
+	\begin{matrix}
+		\sin\theta\cos\varphi & \sin\theta\sin\varphi & \cos\theta
+	\end{matrix}
+	)^T.
+\]
+考虑$\vec{m}_1,\vec{m}_2$，有：
+\begin{align*}
+	\left(
+	\begin{matrix}
+		0 & -\cos\theta & \sin\theta\sin\varphi \\
+		\cos\theta & 0 & -\sin\theta\cos\varphi \\
+		-\sin\theta\sin\varphi & \sin\theta\cos\varphi & 0
+	\end{matrix}
+	\right)
+	\left(
+	\begin{matrix}
+		a_1 \\ 
+		b_1 \\ 
+		c_1
+	\end{matrix}
+	\right)
+	=& 
+	\left(
+	\begin{matrix}
+		a_2 \\ 
+		b_2 \\ 
+		c_2
+	\end{matrix}
+	\right) \\
+	\left(
+	\begin{matrix}
+		0 & -\cos\theta & \sin\theta\sin\varphi \\
+		\cos\theta & 0 & -\sin\theta\cos\varphi \\
+		-\sin\theta\sin\varphi & \sin\theta\cos\varphi & 0
+	\end{matrix}
+	\right)
+	\left(
+	\begin{matrix}
+		a_2 \\ 
+		b_2 \\ 
+		c_2
+	\end{matrix}
+	\right)
+	=& 
+	-\left(
+	\begin{matrix}
+		a_1 \\
+		b_1 \\
+		c_1
+	\end{matrix}
+	\right)
+\end{align*}
+即
+\[
+	\left(
+	\begin{matrix}
+		0 & -\cos\theta & \sin\theta\sin\varphi \\
+		\cos\theta & 0 & -\sin\theta\cos\varphi \\
+		-\sin\theta\sin\varphi & \sin\theta\cos\varphi & 0
+	\end{matrix}
+	\right)^2
+	\left(
+	\begin{matrix}
+		a_j \\ 
+		b_j \\ 
+		c_j
+	\end{matrix}
+	\right)
+	=
+	-\left(
+	\begin{matrix}
+		a_j \\ 
+		b_j \\ 
+		c_j
+	\end{matrix}
+	\right)
+\]
+其中，$j=1,2$。则有：
+\begin{align*}
+	\vec{m}_1 =& (
+	\begin{matrix}
+		\sin\varphi & -\cos\varphi & 0
+	\end{matrix}
+	)^T; \\
+	\vec{m}_2 =& (
+	\begin{matrix}
+		\cos\theta\cos\varphi & \cos\theta\sin\varphi & -\sin\theta
+	\end{matrix}
+	)^T.
+\end{align*}
+综上，矩阵$M$可为：
+\[
+	M = \left(
+	\begin{matrix}
+		\sin\varphi & \cos\theta\cos\varphi & \sin\theta\cos\varphi \\
+		-\cos\varphi & \cos\theta\sin\varphi & \sin\theta\sin\varphi \\
+		0 & -\sin\theta & \cos\theta
+	\end{matrix}
+	\right)
+\]
+可以计算$M$的行列式为：
+\[
+	\mathbf{det}(M) = 1 \neq 0.
+\]
+即矩阵$M$可逆，即矩阵$M$为题目所求相似变换矩阵。
+\end{tcolorbox}
+
+\textbf{2.}设$R=\left( \begin{matrix} 1 & 0 \\ 0 & -1 \end{matrix} \right)$,$S=\cfrac{1}{2}\left( \begin{matrix} -1 & -\sqrt{3} \\ \sqrt{3} & -1 \end{matrix} \right)$,找到相似变换矩阵$X$使：
+\[
+	X^{-1}(R\otimes R)X = \left(
+	\begin{matrix}
+		1 & 0 & 0 & 0 \\
+		0 & -1 & 0 & 0 \\
+		0 & 0 & 1 & 0 \\
+		0 & 0 & 0 & -1
+	\end{matrix}
+	\right),
+	X^{-1}(S\otimes S)X = \frac{1}{2}\left(
+	\begin{matrix}
+		2 & 0 & 0 & 0 \\
+		0 & 2 & 0 & 0 \\
+		0 & 0 & -1 & -\sqrt{3} \\
+		0 & 0 & \sqrt{3} & -1
+	\end{matrix}
+	\right)
+\]
+
+\begin{tcolorbox}[breakable, colback = black!5!white, colframe = black]
+记$A = R\otimes R,~B = S\otimes S$，可以计算矩阵$A,B$分别为：
+\[
+	A = \left( \begin{matrix}
+		1 & 0 & 0 & 0 \\
+		0 & -1 & 0 & 0 \\
+		0 & 0 & -1 & 0 \\
+		0 & 0 & 0 & 1
+	\end{matrix} \right), ~ 
+	B = \frac{1}{4} \left( \begin{matrix}
+		1 & \sqrt{3} & \sqrt{3} & 3 \\
+		-\sqrt{3} & 1 & -3 & \sqrt{3} \\
+		-\sqrt{3} & -3 & 1 & \sqrt{3} \\
+		3 & -\sqrt{3} & -\sqrt{3} & 1
+	\end{matrix} \right).
+\]
+将矩阵$X$按列向量分块，即：
+\[
+	X = \left( \begin{matrix}
+		\vec{x}_1 & \vec{x}_2 & \vec{x}_3 & \vec{x}_4
+	\end{matrix} \right).
+\]
+则矩阵$X$满足：
+\begin{align*}
+	A\left( \begin{matrix}
+		\vec{x}_1 & \vec{x}_2 & \vec{x}_3 & \vec{x}_4
+	\end{matrix} \right) =& X \left( \begin{matrix}
+		1 & 0 & 0 & 0 \\
+		0 & -1 & 0 & 0 \\
+		0 & 0 & 1 & 0 \\
+		0 & 0 & 0 & -1
+	\end{matrix} \right) = \left( \begin{matrix}
+		\vec{x}_1 & -\vec{x}_2 & \vec{x}_3 & -\vec{x}_4
+	\end{matrix} \right); \\
+	B\left( \begin{matrix}
+		\vec{x}_1 & \vec{x}_2 & \vec{x}_3 & \vec{x}_4
+	\end{matrix} \right) =& X \left( \begin{matrix}
+		1 & 0 & 0 & 0 \\
+		0 & 1 & 0 & 0 \\
+		0 & 0 & -\frac{1}{2} & -\frac{\sqrt{3}}{2} \\
+		0 & 0 & \frac{\sqrt{3}}{2} & -\frac{1}{2}
+	\end{matrix} \right) = \left( \begin{matrix}
+		\vec{x}_1 & \vec{x}_2 & -\frac{1}{2}\vec{x}_3-\frac{\sqrt{3}}{2}\vec{x}_4 & \frac{\sqrt{3}}{2}\vec{x}_3-\frac{1}{2}\vec{x}_4
+	\end{matrix} \right).
+\end{align*}
+令$\vec{x}_i = \left( \begin{matrix}
+	a_i & b_i & c_i & d_i
+\end{matrix} \right)^T$，则根据$x_1,x_3$是$A$本征值为$1$的本征向量，$x_2,x_4$是本征值为$-1$的本征向量，可以得知：
+\[
+	b_1 = c_1 = b_3 = c_3 = 0; ~ a_2 = d_2 = a_4 = d_4 = 0.
+\]
+则有：
+\begin{align*}
+	\frac{1}{4} \left( \begin{matrix}
+		1 & \sqrt{3} & \sqrt{3} & 3 \\
+		-\sqrt{3} & 1 & -3 & \sqrt{3} \\
+		-\sqrt{3} & -3 & 1 & \sqrt{3} \\
+		3 & -\sqrt{3} & -\sqrt{3} & 1
+	\end{matrix} \right) \left( \begin{matrix}
+		a_1 \\
+		0 \\
+		0 \\
+		d_1
+	\end{matrix} \right) &= \left( \begin{matrix}
+		a_1 \\
+		0 \\
+		0 \\
+		d_1
+	\end{matrix} \right); \\
+	{}
+	\frac{1}{4} \left( \begin{matrix}
+		1 & \sqrt{3} & \sqrt{3} & 3 \\
+		-\sqrt{3} & 1 & -3 & \sqrt{3} \\
+		-\sqrt{3} & -3 & 1 & \sqrt{3} \\
+		3 & -\sqrt{3} & -\sqrt{3} & 1
+	\end{matrix} \right) \left( \begin{matrix}
+		0 \\
+		b_2 \\
+		c_2 \\
+		0
+	\end{matrix} \right) &= \left( \begin{matrix}
+		0 \\
+		b_2 \\
+		c_2 \\
+		0
+	\end{matrix} \right); \\
+	{}
+	\frac{1}{4} \left( \begin{matrix}
+		1 & \sqrt{3} & \sqrt{3} & 3 \\
+		-\sqrt{3} & 1 & -3 & \sqrt{3} \\
+		-\sqrt{3} & -3 & 1 & \sqrt{3} \\
+		3 & -\sqrt{3} & -\sqrt{3} & 1
+	\end{matrix} \right) \left( \begin{matrix}
+		a_3 \\
+		0 \\
+		0 \\
+		d_3
+	\end{matrix} \right) &= \left( \begin{matrix}
+		-\frac{1}{2}a_3 \\
+		-\frac{\sqrt{3}}{2}b_4 \\
+		-\frac{\sqrt{3}}{2}c_4 \\
+		-\frac{1}{2}d_4
+	\end{matrix} \right).
+\end{align*}
+可以解得：
+\begin{align*}
+	\vec{x}_1 =& \left( \begin{matrix}
+		\frac{1}{\sqrt{2}} & 0 & 0 & \frac{1}{\sqrt{2}}
+	\end{matrix} \right)^T; \\
+	{}
+	\vec{x}_2 =& \left( \begin{matrix}
+		0 & \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0
+	\end{matrix} \right)^T; \\
+	\vec{x}_3 =& \left( \begin{matrix}
+		\frac{1}{\sqrt{2}} & 0 & 0 & -\frac{1}{\sqrt{2}}
+	\end{matrix} \right)^T; \\
+	\vec{x}_4 =& \left( \begin{matrix}
+		0 & \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0
+	\end{matrix} \right)^T.
+\end{align*}
+综上所述，相似变换矩阵$X$为：
+\[
+	X = \left( \begin{matrix}
+		\frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} & 0 \\
+		0 & \frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} \\
+		0 & -\frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} \\
+		\frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}} & 0 \\
+	\end{matrix} \right)
+\]
+\end{tcolorbox}
+
+\end{document}

@@ -1,0 +1,362 @@
+\documentclass[reqno,a4paper,12pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm,geometry,xcolor,soul,graphicx}
+\usepackage{titlesec}
+\usepackage{enumerate}
+\usepackage{lipsum}
+\usepackage{listings}
+%\RequirePackage[most]{tcolorbox}
+%\usepackage{float}  %可以在colorbox环境下添加table环境 此时，\begin{table}[H] 位置需要H
+\usepackage{braket}
+\allowdisplaybreaks[4] %align公式跨页
+\usepackage{xeCJK}
+\setCJKmainfont[AutoFakeBold = true]{Kai}
+\geometry{left=0.7in, right=0.7in, top=1in, bottom=1in}
+
+\renewcommand{\baselinestretch}{1.3}
+
+\title{群论第三章作业}
+\author{董建宇 ~~ 202328000807038}
+
+\begin{document}
+
+\maketitle
+\titleformat{\section}[hang]{\small}{\thesection}{0.8em}{}{}
+\titleformat{\subsection}[hang]{\small}{\thesubsection}{0.8em}{}{}
+
+\begin{enumerate}[1.]
+
+\item 设$G$是一个非阿贝尔群，$D(G)$是群$G$的一个不可约真实表示，元素$R$的表示矩阵为$D(R)$。现让群$G$元素$R$分别与下列矩阵对应，问此矩阵的集合是否构成群$G$的表示？若是表示，是否真是表示？(1) $D(R)^\dagger$; (2) $D(R)^T$; (3) $D(R^{-1})$; (4) $D(R)^*$; (5) $D(R^{-1})^\dagger$; (6) $\mathbf{det}D(R)$; (7) $\mathbf{Tr}D(R)$. 例如，第一小题。设$R\longleftrightarrow D(R)^\dagger$，问$D(R)^\dagger$的集合$D(G)^\dagger$是否构成群$G$的表示？
+
+\begin{proof}
+由题意可知，$D(G)$是群$G$的不可约真实表示，即对于任意的群元素$R,S\in G$，有：
+\[
+	D(R) D(S) = D(RS).
+\]
+
+则分别考虑题中矩阵的集合是否构成群$G$的表示如下：
+\begin{enumerate}[(1)]
+\item $D(RS)^\dagger = D(S)^\dagger D(R)^\dagger \neq D(R)^\dagger D(S)^\dagger$，则不构成群$G$的表示。
+
+\item $D(RS)^T = D(S)^T D(R)^T \neq D(R)^T D(S)^T$，则不构成群$G$的表示。
+
+\item $D((RS)^{-1}) = D(S^{-1}) D(R^{-1}) \neq D(R^{-1}) D(S^{-1})$，则不构成群$G$的表示。
+
+\item $D(RS)^* = D(R)^* D(S)^*$，且$D(G)^*$与群$G$同构，则构成群$G$的真实表示。
+
+\item $D((RS)^{-1})^\dagger = D(S^{-1}R^{-1})^\dagger = D(R^{-1})^\dagger D(S^{-1})^\dagger$，且$D(G^{-1})^\dagger$与群$G$同构，则构成群$G$的真实表示。
+
+\item $\mathbf{det}D(RS) = \mathbf{det} D(R) \mathbf{det} D(S)$，且$\mathbf{det} D(G)$与群$G$同态，则构成群$G$的非真实表示。
+
+\item $\mathbf{Tr} D(RS) \neq \mathbf{Tr} D(R) \mathbf{Tr} D(S)$，则$\mathbf{Tr}D(G)$不是群$G$的表示。
+\end{enumerate}
+
+\end{proof}
+
+\medskip
+
+\item 有限群群代数中，右乘群元素产生的表示$\bar{D}(G)$与正则表示等价。试具体计算$D_3$群群代数中，左乘和右乘群元素产生的这两个表示间的相似变换矩阵。能不能把此方法推广，对一般的有限群，计算这两种表示间的相似变换矩阵。
+
+\begin{proof}
+以群元素$R$为基，左乘群元素$S$，得到正则表示$D(S)$，
+\[
+	SR = \sum_P P D_{PR}(S), \ \ D_{PR}(S) = \left\{ \begin{aligned}
+		1, & P = SR; \\
+		0, & P \neq SR.
+	\end{aligned} \right.
+\]
+
+右乘群元素$S$得到$\bar{D}(G)$如下：
+\[
+	RS = \sum_T \bar{D}_{RT}(S) T, \ \ \bar{D}_{RT}(S) = \left\{ \begin{aligned}
+		1, & T = RS; \\
+		0, & T \neq RS.
+	\end{aligned} \right.
+\]
+
+设两个表示通过相似变换$X$联系，即
+\[
+	\sum_{P\in G} \bar{D}_{TP}(S) X_{PR} = \sum_{P\in G} X_{TP} D_{PR}(S).
+\]
+
+带入表示矩阵，可得
+\[
+	X_{(TS)R} = X_{T(SR)}.
+\]
+
+由群元素乘积满足结合律可知，在$X$矩阵中满足行列指标作为群元素相乘，乘积相同的矩阵元素必须相等。可以令行列指标相乘等于恒元$E$对应的的$X$的矩阵元素为$1$，其余元素为$0$。
+
+考虑$D_3 = \{E, D, F, A, B, C\}$群乘法表，可以得到相似变换矩阵$X$为：
+\[
+	X = \left( \begin{matrix}
+		1 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 1 & 0 & 0 & 0 \\
+		0 & 1 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 1 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 1 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 1 \\
+	\end{matrix} \right)
+\]
+
+对于一般的有限群，我们仍可以选择将其乘法表中恒元对应的位置取$1$，其余位置为$0$获得其相似变换矩阵。
+\end{proof}
+
+\medskip
+
+\item 证明有限群包含的非自逆类数目等于不等价不可约的非自共轭表示的数目，因此自逆类的数目等于不等价不可约的自共轭表示的数目。
+
+\begin{proof}
+设有限群$G$中有$n$个自逆类$C_i$，$m$对相逆类$C_\alpha$和$C_\alpha^{-1}$，在不可约表示中，自逆类的特征标是实数，相逆类的特征标互为复共轭。此外，自共轭表示的特征标是实数，互为复共轭的一对非自共轭表示的特征标也互为复共轭，因此每一对非自共轭表示的特征标之和是实数，特征标之差对自逆类为零，对相逆类为纯虚数。
+
+由于群$G$所有不等价不可约表示的特征标作为类的函数，线性无关，且构成类函数的完备基，则非自共轭表示的对数就不能大于相逆类的对数$m$。
+
+此外，可以定义$m$个类的函数$F_\beta$
+\[
+	F_\beta(C_i) = 0; \ \ F_\beta(C_\alpha) = -F_\beta(C_\alpha^{-1}) = \delta_{\alpha\beta}.
+\]
+
+这些函数可以表示为群$G$各不等价不可约表示的特征标的线性组合。由于自共轭表示的特征标并不出现，每一对非自共轭表示的特征标都以差的形式出现，则这些差的项数，即非自共轭表示的对数不能小于$m$。
+
+综上所述，非自共轭表示的对数等于群中相逆类的对数，以及自共轭表示的个数等于群众自逆类的个数。
+\end{proof}
+
+\medskip
+
+\item 计算$T$群三维不可约表示$D^T$自直乘约化的相似变换矩阵$X$
+\[
+	X^{-1} \left\{ D^T(R) \times D^T(R) \right\} X = \sum_{j} a_j D^j(R).
+\]
+
+\begin{proof}
+取$T$群的生成元$T_z^2$和$R_1$，在三维表示中的表示矩阵分别为：
+\[
+	D^T(T_z^2) = \left( \begin{matrix}
+		-1 & 0 & 0 \\
+		0 & -1 & 0 \\
+		0 & 0 & 1
+	\end{matrix} \right); \ \ 
+	D^T(R_1) = \left( \begin{matrix}
+		0 & 0 & 1 \\
+		1 & 0 & 0 \\
+		0 & 1 & 0
+	\end{matrix} \right).
+\]
+
+由特征标公式容易计算重数如下：
+\begin{align*}
+	a_1 =& \frac{1}{12}(1\times9\times1 + 3\times1\times1) = 1; \\
+	a_2 =& \frac{1}{12}(1\times9\times1 + 3\times1\times1) = 1; \\
+	a_3 =& \frac{1}{12}(1\times9\times1 + 3\times1\times1) = 1; \\
+	a_4 =& \frac{1}{12}(1\times9\times3+3\times1\times(-1))= 2.
+\end{align*}
+
+考虑$T_z^2$在相似变换前后的矩阵形式，记$D(R) = D^T(R) \times D^T(R)$。
+\[
+	D(T_z^2) = \mathbf{diag}\{1,1,-1, 1,1,-1, -1,-1,1\};
+\]
+\[
+	X^{-1}D(T_z^2)X = \mathbf{diag}\{1,1,1, -1,-1,1, -1,-1,1\}.
+\]
+
+对于$R_1$有：
+\[
+	X^{-1}D(R_1) X = \left( \begin{matrix}
+		1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		0 & \omega & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & \omega^2 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+		0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+	\end{matrix} \right)
+\]
+
+从而可以求解得到相似变换矩阵$X$如下
+\[
+	X = \left( \begin{matrix}
+		1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+		1 & \omega^2 & \omega & 0 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+		1 & \omega & \omega^2 & 0 & 0 & 0 & 0 & 0 & 0 \\
+	\end{matrix} \right)
+\]
+\end{proof}
+
+\medskip
+
+\item 试计算第二章习题15给出的群的特征表表
+
+\begin{proof}
+群$G$共有$12$个元素，分属六个不同的类，则特征标标为$6\times6$的矩阵，其中第一行为恒等表示的特征标，均为$1$。注意到，不变子群$\{E, M, N\}$以及其三个陪集$\{A, K, L\}$; $\{B, C, D\}$; $\{F, I, J\}$构成的商群同构与$C_4$群，则据此可以给出4个不同的一维不可约表示。由于
+\[
+	12 = 1^2\times 4 + 2^2 \times 2.
+\]
+
+群$G$还有两个二维不可约表示。对于不变子群$\{E, A\}$以及其五个陪集$\{B, F\}$; $\{C, I\}$; $\{D, J\}$; $\{K, M\}$; $\{L, N\}$构成的商群同构与$D_3$群，则据此可以给出一个二维不可约表示。另一个不可约表示的特征标可以利用正交完备性关系得到。即群$G$的特征标表为：
+\begin{table}[h!]
+\begin{tabular}{c|cccccc}
+\centering
+	 & E & A & BCD & FIJ & KL & MN \\
+	\hline
+	$\chi^1$ & 1 & 1 & 1 & 1 & 1 & 1 \\
+	$\chi^2$ & 1 & 1 & -1 & -1 & 1 & 1 \\
+	$\chi^3$ & 1 & -1 & i & -i & -1 & 1 \\
+	$\chi^4$ & 1 & -1 & -i & i & -1 & 1 \\
+	$\chi^5$ & 2 & 2 & 0 & 0 & -1 & -1 \\
+	$\chi^6$ & 2 & -2 & 0 & 0 & 1 & -1 \\
+\end{tabular}
+\end{table}
+
+\end{proof}
+
+\medskip
+
+\item 设$D_3$群元素是在二维空间中的坐标变换
+\[
+	\left( \begin{matrix}
+		x' \\
+		y'
+	\end{matrix} \right) = 
+	R \left( \begin{matrix}
+		x \\
+		y
+	\end{matrix} \right), \ \ \ R \in D_3.
+\]
+
+取生成元$D$和$A$，它们的变换矩阵正是它们在二维表示$D^E(D_3)$中的表示矩阵
+\[
+	D = D^E(D) = \frac{1}{2} \left( \begin{matrix}
+		-1 & -\sqrt{3} \\
+		\sqrt{3} & -1
+	\end{matrix} \right), \ \ A = D^E(A) = \left( \begin{matrix}
+		1 & 0 \\
+		0 & -1
+	\end{matrix} \right).
+\]
+
+已知下列函数基架设的四维函数空间对$D_3$群保持不变
+\[
+	\psi_1(x, y) = x^3, \ \psi_2(x, y) = x^2y, \ \psi_3(x, y) = xy^2, \ \psi_4(x, y) = y^3.
+\]
+
+试计算$D_3$群在此空间关于这组函数基的线性表示，即计算$D_3$群生成元在此表示中的表示矩阵，把此表示约化为$D_3$群不可约表示的直和，把此函数基组合为分属各不等价不可约表示的函数基。
+
+\begin{proof}
+分别计算两个生成元二维表示矩阵的逆为：
+\[
+	D^{-1} = \frac{1}{2} \left( \begin{matrix}
+		-1 & \sqrt{3} \\
+		-\sqrt{3} & -1
+	\end{matrix} \right); \ \
+	A^{-1} = \left( \begin{matrix}
+		1 & 0 \\
+		0 & -1
+	\end{matrix} \right)
+\]
+
+则可以计算：
+\begin{align*}
+	P_D \psi_1(x, y) &= \frac{1}{8}(-x+\sqrt{3}y)^3 = \frac{1}{8} (-x^3 + 3\sqrt{3} x^2y - 9 xy^2 + 3\sqrt{3}y^3) \\
+	&= \frac{1}{8}(-\psi_1 + 3\sqrt{3}\psi_2 - 9\psi_3 + 3\sqrt{3}\psi_4); \\
+	P_D \psi_2(x, y) &= \frac{1}{8}(-x+\sqrt{3}y)^2(-\sqrt{3}x-y) = \frac{1}{8} (-\sqrt{3}x^3 + 5x^2y - \sqrt{3}xy^2 - 3y^3) \\
+	&= \frac{1}{8}(-\sqrt{3}\psi_1 + 5\psi_2 - \sqrt{3}\psi_3 - 3\psi_4); \\
+	P_D \psi_3(x, y) &= \frac{1}{8}(-x+\sqrt{3}y)(-\sqrt{3}x-y)^2 = \frac{1}{8}(-3x^3 + \sqrt{3}x^2y + 5 xy^2 + \sqrt{3}y^3) \\
+	&= \frac{1}{8}(-3\psi_1 + \sqrt{3}\psi_2 + 5\psi_3 + \sqrt{3}\psi_4); \\
+	P_D \psi_4(x, y) &= \frac{1}{8}(-\sqrt{3}x-y)^3 = \frac{1}{8} (-3\sqrt{3} x^3 - 9 x^2y - 3\sqrt{3} xy^2 - y^3) \\
+	&= \frac{1}{8}(-3\sqrt{3}\psi_1 - 9\psi_2 - 3\sqrt{3}\psi_3 - \psi_4); \\
+	P_A\psi_1(x, y) &= x^3 = \psi_1; \\
+	P_A\psi_2(x, y) &= x^2(-y) = -\psi_2; \\
+	P_A\psi_3(x, y) &= x(-y)^2 = \psi_3; \\
+	P_A\psi_4(x, y) &= (-y)^3 = -\psi_4. 
+\end{align*}
+
+则$D_3$群的生成元在此表示中的表示矩阵为：
+\[
+	D(D) = \frac{1}{8} \left( \begin{matrix}
+		-1 & -\sqrt{3} & -3 & -3\sqrt{3} \\
+		3\sqrt{3} & 5 & \sqrt{3} & -9 \\
+		-9 & -\sqrt{3} & 5 & -3\sqrt{3} \\
+		3\sqrt{3} & -3 & \sqrt{3} & -1
+	\end{matrix} \right); \ \ 
+	D(A) = \left( \begin{matrix}
+		1 & 0 & 0 & 0 \\
+		0 & -1 & 0 & 0 \\
+		0 & 0 & 1 & 0 \\
+		0 & 0 & 0 & -1
+	\end{matrix} \right).
+\]
+
+要找到相似变换矩阵$X$使得：
+\[
+	D(D)X = \frac{X}{2} \left( \begin{matrix}
+		2 & 0 & 0 & 0 \\
+		0 & 2 & 0 & 0 \\
+		0 & 0 & -1 & -\sqrt{3} \\
+		0 & 0 & \sqrt{3} & -1
+	\end{matrix} \right); \ \ 
+	D(A)X = X \left( \begin{matrix}
+		1 & 0 & 0 & 0 \\
+		0 & -1 & 0 & 0 \\
+		0 & 0 & 1 & 0 \\
+		0 & 0 & 0 & -1
+	\end{matrix} \right).
+\]
+
+由第二个方程可以将矩阵$X$写作如下形式：
+\[
+	X = \left( \begin{matrix}
+		a_1 & 0 & c_1 & 0 \\
+		0 & b_1 & 0 & d_1 \\
+		a_2 & 0 & c_2 & 0 \\
+		0 & b_2 & 0 & d_2
+	\end{matrix} \right).
+\]
+
+带入第一个方程可得：
+\begin{equation*}
+\begin{split}
+	&\left( \begin{matrix}
+		-a_1-3a_2 & -\sqrt{3}(b_1+3b_2) & -c_1-3c_2 & -\sqrt{3}(d_1+3d_2) \\
+		\sqrt{3}(3a_1+a_2) & 5b_1-9b_2 & \sqrt{3}(3c_1+c_2) & 5d_1-9d_2 \\
+		-9a_1+5a_2 & -\sqrt{3}(b_1+3b_2) & -9c_1+5c_2 & -\sqrt{3}(d_1+3d_2) \\
+		\sqrt{3}(3a_1+a_2) & -3b_1-b_2 & \sqrt{3}(3c_1+c_2) & -3d_1-d_2
+	\end{matrix} \right) \\
+	=&\left( \begin{matrix}
+		2a_1 & 0 & -c_1 & -\sqrt{3}c_1 \\
+		0 & 2b_1 & \sqrt{3}d_1 & -d_1 \\
+		2a_2 & 0 & -c_2 & -\sqrt{3}c_2 \\
+		0 & 2b_2 & \sqrt{3}d_2 & -d_2
+	\end{matrix} \right).
+\end{split}
+\end{equation*}
+
+即$a_2 = -3a_1, \ b_1 = -3b_2, \ c_1 = c_2 = d_1 = d_2$，从而可以得到矩阵$X$为：
+\[
+	X = \left( \begin{matrix}
+		1 & 0 & 1 & 0 \\
+		0 & 3 & 0 & 1 \\
+		-3 & 0 & 1 & 0 \\
+		0 & -1 & 0 & 1
+	\end{matrix} \right).
+\]
+
+从而各不可约表示的函数基为：
+\begin{align*}
+	&\psi_1'(x, y) = \psi_1 - 3\psi_3 = x(x^2-3y^2); \\
+	&\psi_2'(x, y) = 3\psi_2 - \psi_4 = y(3x^2-y^2); \\
+	&{\psi_3^1}'(x, y) = \psi_1 + \psi_3 = x(x^2+y^2); \\
+	&{\psi_3^2}'(x, y) = \psi_2 + \psi_4 = y(x^2+y^2).
+\end{align*}
+
+\end{proof}
+\end{enumerate}
+
+
+\end{document}

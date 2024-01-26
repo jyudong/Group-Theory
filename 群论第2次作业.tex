@@ -1,0 +1,386 @@
+\documentclass[reqno,a4paper,12pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm,geometry,xcolor,soul,graphicx}
+\usepackage{titlesec}
+\usepackage{enumerate}
+\usepackage{lipsum}
+\usepackage{listings}
+\RequirePackage[most]{tcolorbox}
+\usepackage{float}  %可以在colorbox环境下添加table环境 此时，\begin{table}[H] 位置需要H
+\usepackage{braket}
+\allowdisplaybreaks[4] %align公式跨页
+\usepackage{xeCJK}
+\setCJKmainfont[AutoFakeBold = true]{Kai}
+\geometry{left=0.7in, right=0.7in, top=1in, bottom=1in}
+
+\renewcommand{\baselinestretch}{1.3}
+
+\title{群论第二章作业}
+\author{董建宇 ~~ 202328000807038}
+
+\begin{document}
+
+\maketitle
+\titleformat{\section}[hang]{\small}{\thesection}{0.8em}{}{}
+\titleformat{\subsection}[hang]{\small}{\thesubsection}{0.8em}{}{}
+
+\begin{enumerate}[1.]
+\item 设$H_1$和$H_2$是群$G$的两个子群,证明$H_1$和$H_2$的公共元素的集合也构成群$G$的子群。
+\begin{tcolorbox}[breakable, colback = black!5!white, colframe = black]
+据题意，显然有$H_1 \cap H_2 \subseteq G$。
+
+\textbf{恒元：}因为$H_1$与$H_2$是群$G$的子群，则$H_1$与$H_2$都包含恒元$E$，则$H_1$和$H_2$的公共元素也包含恒元$E$。
+
+\textbf{结合律：}因为$H_1$和$H_2$的公共元素的集合为群$G$的子集，则结合律自然满足。
+
+\textbf{封闭性：}考虑任意两个$H_1$和$H_2$的公共元素$\alpha$和$\beta$，因为$H_1$和$H_2$是群$G$的两个子群，子群满足封闭性，即：
+\[
+	\alpha\beta \in H_1, \ \ \ \alpha\beta \in H_2.
+\]
+则有：
+\[
+	\alpha\beta \in H_1 \cap H_2.
+\]
+即$H_1$和$H_2$的公共元素的集合满足封闭性。
+
+\textbf{逆元：}考虑任意一个$H_1$和$H_2$的公共元素$\alpha$，在子群$H_1$和$H_2$中存在$\alpha$的逆元$\alpha_1^{-1}$和$\alpha_2^{-1}$。由于逆元具有唯一性，则$\alpha_1^{-1} = \alpha_2^{-1} = \alpha^{-1}\in H_1 \cap H_2$，即任意一个$H_1$和$H_2$的公共元素$\alpha$，都存在逆元$\alpha^{-1}\in H_1 \cap H_2$。
+
+综上所述，$H_1$和$H_2$的公共元素的集合也构成群$G$的子群。
+\end{tcolorbox}
+
+\item 证明: 除恒元外，每个元素的阶都是$2$的群一定是阿贝尔群。
+\begin{tcolorbox}[breakable, colback = black!5!white, colframe = black]
+考虑任意两个除恒元外的元素$a$和$b$，有：
+\[
+	a^2 = E, \ \ \ b^2 = E, \ \ \ (ab)^2 = abab = E.
+\]
+则有：
+\[
+	aabb = E^2 = E = abab.
+\]
+两侧同时左乘$a^{-1}$，右乘$b^{-1}$，则得到：
+\[
+	ab = ba.
+\]
+即任意两个除恒元外的元素可逆，即除恒元外，每个元素的阶都是2的群一定是阿贝尔群。
+\end{tcolorbox}
+
+\item 泡利矩阵定义如下：
+\[
+	\sigma_1 = \left( \begin{matrix}
+		0 & 1 \\
+		1 & 0
+	\end{matrix} \right), \ \
+	\sigma_2 = \left( \begin{matrix}
+		0 & -i \\
+		i & 0
+	\end{matrix} \right), \ \
+	\sigma_3 = \left( \begin{matrix}
+		1 & 0 \\
+		0 & -1
+	\end{matrix} \right), \ \ \
+\]
+\[
+	\sigma_a\sigma_b = \delta_{ab}I + i\sum_{d=1}^3 \varepsilon_{abd} \sigma_d \ \ \text{如}\sigma_a^2 = I, \ \ \sigma_1\sigma_2 = i\sigma_3.
+\]
+
+其中$\varepsilon_{abd}$是三阶完全反对称张量。证明由$\sigma_1$和$\sigma_2$的所有可能乘积和幂次的集合构成群，列出此群的乘法表，指出此群的阶数，各元素的阶数，群所包含的类和不变子群，不变子群的商群与什么群同构，建立同构关系，证明此群和正方形对称群$D_4$同构。
+\begin{tcolorbox}[breakable, colback = black!5!white, colframe = black]
+可以计算，$\sigma_1$和$\sigma_2$的所有可能乘积和幂次的集合为：
+\[
+	\{ \sigma_1, \ -\sigma_1, \ \sigma_2, \ -\sigma_2, \ i\sigma_3, \ -i \sigma_3, \ I, \ -I \}.
+\]
+可以计算乘法表如下：
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+	\hline
+	{} & $I$ & $-I$ & $\sigma_1$ & $-\sigma_1$ & $\sigma_2$ & $-\sigma_2$ & $i\sigma_3$ & $-i\sigma_3$ \\ \hline
+	$I$ & $I$ & $-I$ & $\sigma_1$ & $-\sigma_1$ & $\sigma_2$ & $-\sigma_2$ & $i\sigma_3$ & $-i\sigma_3$ \\ \hline
+	$-I$ & $-I$ & $I$ & $-\sigma_1$ & $\sigma_1$ & $-\sigma_2$ & $\sigma_2$ & $-i\sigma_3$ & $i\sigma_3$ \\ \hline
+	$\sigma_1$ & $\sigma_1$ & $-\sigma_1$ & $I$ & $-I$ & $i\sigma_3$ & $-i\sigma_3$ & $\sigma_2$ & $-\sigma_2$ \\ \hline
+	$-\sigma_1$ & $-\sigma_1$ & $\sigma_1$ & $-I$ & $I$ & $-i\sigma_3$ & $i\sigma_3$ & $-\sigma_2$ & $\sigma_2$ \\ \hline
+	$\sigma_2$ & $\sigma_2$ & $-\sigma_2$ & $-i\sigma_3$ & $i\sigma_3$ & $I$ & $-I$ & $-\sigma_1$ & $\sigma_1$ \\ \hline
+	$-\sigma_2$ & $-\sigma_2$ & $\sigma_2$ & $i\sigma_3$ & $-i\sigma_3$ & $-I$ & $I$ & $\sigma_1$ & $-\sigma_1$ \\ \hline
+	$i\sigma_3$ & $i\sigma_3$ & $-i\sigma_3$ & $-\sigma_2$ & $\sigma_2$ & $\sigma_1$ & $-\sigma_1$ & $-I$ & $I$ \\ \hline
+	$-i\sigma_3$ & $-i\sigma_3$ & $i\sigma_3$ & $\sigma_2$ & $i\sigma_2$ & $-\sigma_1$ & $\sigma_1$ & $I$ & $-I$ \\ \hline
+\end{tabular}
+\end{table}
+从乘法表中容易看出，该集合满足封闭性与结合律，且存在恒元$I$，且每一个元素存在唯一逆元，即该集合构成群。
+
+群阶数为$8$。
+
+其中$I$的阶数为$1$；$-I, \sigma_1, -\sigma_1, \sigma_2, -\sigma_2$的阶数为$2$；$i\sigma_3, -i\sigma_3$的阶数为$4$。
+
+群包含的类为：
+\[
+	\{ I \}; \ \ \{ -I \}; \ \ \{ \sigma_1, -\sigma_1 \}; \ \ \{ \sigma_2, -\sigma_2 \}; \ \ \{ i\sigma_3, -i\sigma_3 \}
+\]
+不变子群为：
+\[
+	\{ I, -I \}; \ \ \{ I, -I, \sigma_1, -\sigma_1 \}; \ \ \{ I, -I, \sigma_2, -\sigma_2 \}; \ \ \{ I, -I, i\sigma_3, -i\sigma_3 \}.
+\]
+第一个不变子群的商群同构与四阶反演群$V_4$。映射关系为$\{I, -I\} \to E; \ \{\sigma_1, -\sigma_1\} \to A; \ \{\sigma_2, -\sigma_2\} \to B; \ \{i\sigma_3, -i\sigma_3\} \to C = AB = BA.$
+
+后三个不变子群的商群为二阶群，同构与$C_2$群。映射关系为不变子群映射到恒元$E$，陪集映射到二阶群非恒元元素$A$。
+
+$D_4$群元素与题中群元素对应关系如下：
+\setlength{\tabcolsep}{5mm}{
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+	\hline
+	$G$ & $I$ & $i\sigma_3$ & $-I$ & $-i\sigma_3$ & $\sigma_1$ & $-\sigma_2$ & $-\sigma_1$ & $\sigma_2$ \\
+	\hline
+	$D_4$ & $E$ & $T$ & $T^2$ & $T^3$ & $S_1$ & $S_2$ & $S_3$ & $S_4$ \\
+	\hline
+\end{tabular}
+\end{table} }
+\end{tcolorbox}
+
+\item 准确到同构，证明九阶群$G$只有两种：循环群$C_9$和直乘群。
+\begin{tcolorbox}[breakable, colback = black!5!white, colframe = black]
+在九阶群中，除恒元外群元素的阶只能为$3$或$9$。
+
+1. 若至少存在$1$个元素的阶为$9$，那么根据群乘法的封闭性，可知群$G$为九阶循环群$C_9$。
+
+2. 若群$G$中不存在阶为$9$的群元素，且至少存在一个阶为$3$的元素记作$R$，构成$3$阶循环群$C_3 = \{E, R, R^2\}$。考虑其有陪集$C_3A = \{A, B, C\}$，其中$A$为群$G$中元素，且$A\neq E, A\neq R, A\neq R^2$。$B = RA, C = R^2 A$。因为$A,B,C$均为$3$阶群元，则有$A^2, B^2, C^2$既不能等于$E,R,R^2$也不能等于$A, B, C$。即群$G$的群元素可以写为：
+\[
+	G = \{E, R, R^2, A, B, C, A^2, B^2, C^2\}.
+\]
+注意到$BA = RA^2 \neq A^2 \neq B^2$，则有$BA = RA^2 = C^2 = R^2AR^2A$。两侧左乘$R^{-1}$，右乘$A^{-1}R$可得：
+\[
+	AR = RA.
+\]
+则有$B^2 = RARA = R^2A^2$，综上，群$G$可以写为：
+\[
+	G = \{ E, R, R^2, A, RA, R^2A, A^2, R^2A^2, RA^2\} = \{E,R,R^2\} \otimes \{E,A,A^2\}.
+\]
+综上所述，九阶群$G$只有两种：循环群$C_9$和直乘群。
+\end{tcolorbox}
+
+\item 设有限群$G$的阶为$g$，$C_a$是群$G$的一个类，含$n(a)$个元素，$S_j$和$S_k$是类$C_a$中任意两个元素，证明群$G$中满足$S_j = PS_kP^{-1}$的元素$P$的数目等于$m(a) = g/n(a)$。
+\begin{tcolorbox}[breakable, colback = black!5!white, colframe = black]
+对于给定的元素$S_j \in C_\alpha$，设群$G$中所有与$S_j$对易的元素$R$的数目为$m(\alpha)$。可以证明，元素$R$组成的集合$H$构成群$G$的子群。首先，若$R$和$R'$都与$S_j$对易，显然有$RR'$与$S_j$对易，即满足乘法\textbf{封闭性}。\textbf{结合律}显然满足。\textbf{恒元}$E$显然与$S_j$对易。$R$的\textbf{逆元}$R^{-1}$也与$S_j$对易。即$H$为群$G$的子群。
+
+考虑群$G$中不属于子群$H$的元素$T$，且满足
+\[
+	TS_j T^{-1} = S_i \in C_\alpha.
+\]
+则子群$H$的左陪集$TH$中任意元素$TR$满足
+\[
+	TR S_j R^{-1} T^{-1} = T S_j T^{-1} = S_i.
+\]
+则满足$PS_jP^{-1} = S_i$的元素$P$，有：
+\[
+	(P^{-1} T) S_j (P^{-1} T)^{-1} = P^{-1} S_i P = S_j.
+\]
+则有$P^{-1}T \in H$，即$P$属于左陪集$TH$中。因此子群$H$的左陪集$TH$与$S_j$的共轭元素$S_i$具有一一对应关系，即子群$H$的指数等于$S_j$所属类$C_\alpha$中元素数目，即
+\[
+	n(\alpha) = \frac{g}{m(\alpha)}.
+\]
+即有：
+\[
+	m(\alpha) = \frac{g}{n(\alpha)}.
+\]
+\end{tcolorbox}
+
+\item 以$T$群的子群$C_3 = \{ E, \ R_1, \ R_1^2 \}$为基础，将$C_3$群的乘法表扩充，计算$T$群的乘法表。
+
+\begin{tcolorbox}[breakable, colback = black!5!white, colframe = black]
+\begin{enumerate}[(1)]
+\item 选取$T_x^2, \ T_y^2, \ T_z^2$做左陪集，第一行$T_x^2C_3$、第二行$T_y^2C_3$、第三行$T_z^2C_3$；
+
+\item 右陪集由左陪集取逆元得到，第四行$C_3T_x^2$、第五行$C_3T_y^2$、第六行$C_3T_z^2$；
+\begin{align*}
+	(T_x^2C_3)^{-1} =& C_3^{-1} {T_x^2}^{-1} = C_3 T_x^2; \\ 
+	(T_y^2C_3)^{-1} =& C_3^{-1} {T_y^2}^{-1} = C_3 T_y^2; \\
+	(T_z^2C_3)^{-1} =& C_3^{-1} {T_z^2}^{-1} = C_3 T_z^2.
+\end{align*}
+
+\item 左陪集分别右乘$T_x^2, \ T_y^2, \ T_z^2$得到第七至十五行。
+
+\end{enumerate}
+
+\begin{table}[H]
+\centering
+%\setlength{\tabcolsep}{5mm}{
+\begin{tabular}{|c|c|c|c|c|}
+	\hline
+	左乘 & \makebox[0.12\textwidth][c]{$E$} & \makebox[0.12\textwidth][c]{$R_1$} & \makebox[0.12\textwidth][c]{$R_1^2$} & 右乘 \\ 
+	\hline
+	$T_x^2$ & $T_x^2$ & $R_4$ & $R_3^2$ &  \\
+	\hline 
+	$T_y^2$ & $T_y^2$ & $R_3$ & $R_2^2$ &  \\
+	\hline 
+	$T_z^2$ & $T_z^2$ & $R_2$ & $R_4^2$ &  \\
+	\hline
+	 & $T_x^2$ & $R_3$ & $R_4^2$ & $T_x^2$ \\
+	\hline
+	 & $T_y^2$ & $R_2$ & $R_3^2$ & $T_y^2$ \\
+	\hline
+	 & $T_z^2$ & $R_4$ & $R_2^2$ & $T_z^2$ \\
+	\hline
+	$T_x^2$ & $E$ & $R_2$ & $R_2^2$ & $T_x^2$ \\
+	\hline 
+	$T_x^2$ & $T_z^2$ & $R_3$ & $R_1^2$ & $T_y^2$ \\
+	\hline 
+	$T_x^2$ & $T_y^2$ & $R_1$ & $R_4^2$ & $T_z^2$ \\
+	\hline 
+	$T_y^2$ & $T_z^2$ & $R_1$ & $R_3^2$ & $T_x^2$ \\
+	\hline 
+	$T_y^2$ & $E$ & $R_4$ & $R_4^2$ & $T_y^2$ \\
+	\hline 
+	$T_y^2$ & $T_x^2$ & $R_2$ & $R_1^2$ & $T_z^2$ \\
+	\hline 
+	$T_z^2$ & $T_y^2$ & $R_4$ & $R_1^2$ & $T_x^2$ \\
+	\hline 
+	$T_z^2$ & $T_x^2$ & $R_1$ & $R_2^2$ & $T_y^2$ \\
+	\hline 
+	$T_z^2$ & $E$ & $R_3$ & $R_3^2$ & $T_z^2$ \\
+	\hline 
+\end{tabular}%}
+\end{table}
+随后可以进行如下操作：
+\begin{enumerate}[(1)]
+\item 则我们可以把$T$群乘法表分成四行四列$16$个小方块，$C_3$的乘法表在第一行第一列；
+
+\item 陪集表中第一、二、三行的元素分别替换子群乘法表中的元素，填在第一列的第二、三、四小方块；
+
+\item 陪集表中第四、五、六行的元素分别替换子群乘法表中的元素，填在第一行的第二、三、四小方块；
+
+\item 陪集表中第七、八、九行的元素分别替换子群乘法表中的元素，填在第二行的第二、三、四小方块；
+
+\item 陪集表中第十、十一、十二行的元素分别替换子群乘法表中的元素，填在第三行的第二、三、四小方块；
+
+\item 陪集表中第十三、十四、十五行的元素分别替换子群乘法表中的元素，填在第四行的第二、三、四小方块。
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+	\hline
+	\makebox[0.15\textwidth][c]{} & \makebox[0.15\textwidth][c]{$C_3$} & \makebox[0.15\textwidth][c]{$C_3T_x^2$} & \makebox[0.15\textwidth][c]{$C_3T_y^2$} & \makebox[0.15\textwidth][c]{$C_3T_z^2$} \\
+	\hline 
+	$C_3$ & $C_3$ & $C_3T_x^2$ & $C_3T_y^2$ & $C_3T_z^2$ \\
+	\hline 
+	$T_x^2C_3$ & $T_x^2C_3$ & $T_x^2C_3T_x^2$ & $T_x^2C_3T_y^2$ & $T_x^2C_3T_z^2$ \\
+	\hline 
+	$T_y^2C_3$ & $T_y^2C_3$ & $T_y^2C_3T_x^2$ & $T_y^2C_3T_y^2$ & $T_y^2C_3T_z^2$ \\
+	\hline 
+	$T_z^2C_3$ & $T_z^2C_3$ & $T_z^2C_3T_x^2$ & $T_z^2C_3T_y^2$ & $T_z^2C_3T_z^2$ \\
+	\hline
+\end{tabular}
+\end{table}
+则可以写出$T$群乘法表如下：
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|ccc|ccc|ccc|ccc|}
+	\hline
+	 & $E$ & $R_1$ & $R_1^2$ & $T_x^2$ & $R_3$ & $R_4^2$ & $T_y^2$ & $R_2$ & $R_3^2$ & $T_z^2$ & $R_4$ & $R_2^2$ \\
+	\hline
+	$E$ & $E$ & $R_1$ & $R_1^2$ & $T_x^2$ & $R_3$ & $R_4^2$ & $T_y^2$ & $R_2$ & $R_3^2$ & $T_z^2$ & $R_4$ & $R_2^2$ \\
+	$R_1$ & $R_1$ & $R_1^2$ & $E$ & $R_3$ & $R_4^2$ & $T_x^2$ & $R_2$ & $R_3^2$ & $T_y^2$ & $R_4$ & $R_2^2$ & $T_z^2$ \\
+	$R_1^2$ & $R_1^2$ & $E$ & $R_1$ & $R_4^2$ & $T_x^2$ & $R_3$ & $R_3^2$ & $T_y^2$ & $R_2$ & $R_2^2$ & $T_z^2$ & $R_4$ \\
+	\hline
+	$T_x^2$ & $T_x^2$ & $R_4$ & $R_3^2$ & $E$ & $R_2$ & $R_2^2$ & $T_z^2$ & $R_3$ & $R_1^2$ & $T_y^2$ & $R_1$ & $R_4^2$ \\
+	$R_4$ & $R_4$ & $R_3^2$ & $T_x^2$ & $R_2$ & $R_2^2$ & $E$ & $R_3$ & $R_1^2$ & $T_z^2$ & $R_1$ & $R_4^2$ & $T_y^2$ \\
+	$R_3^2$ & $R_3^2$ & $T_x^2$ & $R_4$ & $R_2^2$ & $E$ & $R_2$ & $R_1^2$ & $T_z^2$ & $R_3$ & $R_4^2$ & $T_y^2$ & $R_1$ \\
+	\hline 
+	$T_y^2$ & $T_y^2$ & $R_3$ & $R_2^2$ & $T_z^2$ & $R_1$ & $R_3^2$ & $E$ & $R_4$ & $R_4^2$ & $T_x^2$ & $R_2$ & $R_1^2$ \\
+	$R_3$ & $R_3$ & $R_2^2$ & $T_y^2$ & $R_1$ & $R_3^2$ & $T_z^2$ & $R_4$ & $R_4^2$ & $E$ & $R_2$ & $R_1^2$ & $T_x^2$ \\
+	$R_2^2$ & $R_2^2$ & $T_y^2$ & $R_3$ & $R_3^2$ & $T_z^2$ & $R_1$ & $R_4^2$ & $E$ & $R_4$ & $R_1^2$ & $T_x^2$ & $R_2$ \\
+	\hline 
+	$T_z^2$ & $T_z^2$ & $R_2$ & $R_4^2$ & $T_y^2$ & $R_4$ & $R_1^2$ & $T_x^2$ & $R_1$ & $R_2^2$ & $E$ & $R_3$ & $R_3^2$ \\
+	$R_2$ & $R_2$ & $R_4^2$ & $T_z^2$ & $R_4$ & $R_1^2$ & $T_y^2$ & $R_1$ & $R_2^2$ & $T_x^2$ & $R_3$ & $R_3^2$ & $E$ \\
+	$R_4^2$ & $R_4^2$ & $T_z^2$ & $R_2$ & $R_1^2$ & $T_y^2$ & $R_4$ & $R_2^2$ & $T_x^2$ & $R_1$ & $R_3^2$ & $E$ & $R_3$ \\
+	\hline
+\end{tabular}
+\end{table}
+\end{enumerate}
+\end{tcolorbox}
+
+\newpage
+
+\item 群$G$由12个元素组成，它的乘法表如下：
+\begin{table}[H]
+\centering
+\begin{tabular}{c|cccc|c|cccc|c|cccc}
+	 & E & A & B & C && D & F & I & J && K & L & M & N \\
+	\hline
+	E & E & A & B & C && D & F & I & J && K & L & M & N \\ 
+	A & A & E & F & I && J & B & C & D && M & N & K & L \\
+	B & B & F & A & K && L & E & M & N && I & J & C & D \\
+	C & C & I & L & A && K & N & E & M && J & F & D & B \\
+	&&&&&&&&&&&&&& \\
+	D & D & J & K & L && A & M & N & E && F & I & B & C \\
+	F & F & B & E & M && N & A & K & L && C & D & I & J \\
+	I & I & C & N & E && M & L & A & K && D & B & J & F \\
+	J & J & D & M & N && E & K & L & A && B & C & F & I \\
+	&&&&&&&&&&&&&& \\
+	K & K & M & J & F && I & D & B & C && N & E & L & A \\
+	L & L & N & I & J && F & C & D & B && E & M & A & K \\
+	M & M & K & D & B && C & J & F & I && L & A & N & E \\
+	N & N & L & C & D && B & I & J & F && A & K & E & M \\
+\end{tabular}
+\end{table}
+
+(1) 找出群$G$各元素的逆元；
+
+(2) 指出哪些元素可与群中任意元素乘积对易；
+
+(3) 列出各元素的周期和阶；
+
+(4) 找出群$G$各类包含的元素；
+
+(5) 找出群$G$包含哪些不变子群，列出他们的陪集，并指出他们的商群与什么群同构；
+
+(6) 判断群$G$是否与正四面体对称群$T$或与正六边形对称群$D_6$同构。
+\begin{tcolorbox}[breakable, colback = black!5!white, colframe = black]
+\begin{enumerate}[(1)]
+
+\item 群$G$各元素及其逆元如下：
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+	\hline 
+	$R\in G$ & E & A & B & C & D & F & I & J & K & L & M & N \\
+	\hline
+	$R^{-1}$ & E & A & F & I & J & B & C & D & L & K & N & M \\
+	\hline
+\end{tabular}
+\end{table}
+
+\item 群中$E, A$两个元素可与任意元素乘积对易。
+
+\item 群元素$E$周期为$\{E\}$，阶为$1$; \\
+群元素$A$周期为$\{A, A^2=E\}$，阶为$2$; \\
+群元素$B$周期为$\{B, B^2=A, B^3=F, B^4=E\}$，阶为$4$；\\
+群元素$C$周期为$\{C, C^2=A, C^3=I, C^4=E\}$，阶为$4$；\\
+群元素$D$周期为$\{D, D^2=A, D^3=J, D^4=E\}$，阶为$4$；\\
+群元素$F$周期为$\{F, F^2=A, F^3=B, F^4=E\}$，阶为$4$；\\
+群元素$I$周期为$\{I, I^2=A, I^3=C, I^4=E\}$，阶为$4$；\\
+群元素$J$周期为$\{J, J^2=A, J^3=D, J^4=E\}$，阶为$4$；\\
+群元素$K$周期为$\{K, K^2=N, K^3=A, K^4=M, K^5=L, K^6=E\}$，阶为$6$；\\
+群元素$L$周期为$\{L, L^2=M, L^3=A, L^4=N, L^5=K, L^6=E\}$，阶为$6$；\\
+群元素$M$周期为$\{M, M^2=N, M^3=E\}$，阶为$3$；\\
+群元素$N$周期为$\{N, N^2=M, N^3=E\}$，阶为$3$。
+
+\item 恒元自成一类$\{E\}$；群元素$A$自成一类$\{A\}$，利用乘法表可以得到群$G$的共轭类为：
+\[
+	\{E\}, \ \{A\}, \ \{B, C, D\}, \ \{F, I, J\}, \ \{K, L\}, \ \{M, N\}.
+\]
+
+\item 不变子群$\{E, A\}$，陪集$\{B, F\}, \ \{C, I\}, \ \{D, J\}, \ \{K, M\}, \ \{L, N\}$，其商群同构与$D_3$群。\\
+不变子群$\{E, M, N\}$，陪集$\{A, K, L\}, \ \{B, C, D\}, \ \{F, I, J\}$，其商群同构与$C_4$群。\\
+不变子群$\{E, A, K, L, M, N\}$，陪集$\{B, C, D, F, I, J\}$，其商群同构与$C_2$群。
+
+\item $T$群不包含阶数为$6$的元素，则群$G$与群$T$不同构。$D_6$群不包含阶数为$4$的元素，则群$G$与群$T$不同构。
+\end{enumerate}
+\end{tcolorbox}
+
+\end{enumerate}
+\end{document}
+
+\begin{tcolorbox}[breakable, colback = black!5!white, colframe = black]
+
+\end{tcolorbox}

@@ -1,0 +1,887 @@
+\documentclass[reqno,a4paper,12pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm,geometry,xcolor,soul,graphicx}
+\usepackage{titlesec}
+\usepackage{enumerate}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{ytableau} %杨图
+%\RequirePackage[most]{tcolorbox}
+\usepackage{float}  %可以在colorbox环境下添加table环境 此时，\begin{table}[H] 位置需要H
+\usepackage{braket}
+\allowdisplaybreaks[4] %align公式跨页
+\usepackage{xeCJK}
+\setCJKmainfont[AutoFakeBold = true]{Kai}
+\geometry{left=0.7in, right=0.7in, top=1in, bottom=1in}
+
+\renewcommand{\baselinestretch}{1.3}
+
+\title{群论第四章作业}
+\author{董建宇 ~~ 202328000807038}
+
+\begin{document}
+
+\maketitle
+
+\titleformat{\section}[hang]{\small}{\thesection}{0.8em}{}{}
+\titleformat{\subsection}[hang]{\small}{\thesubsection}{0.8em}{}{}
+%\ytableausetup{boxsize=1.5em} %杨表格式
+
+\begin{enumerate}[1.]
+
+\item 把下列置换化为无公共客体的轮换乘积：
+\begin{enumerate}[(1)]
+\item 
+\begin{align*}
+	(1 \ 2)(2 \ 3)(1 \ 2) =& \left( \begin{aligned}
+		&1 & &2 & 3 \\
+		&2 & &1 & 3
+	\end{aligned}\right)\left( \begin{aligned}
+		&1 & &2 & 3 \\
+		&1 & &3 & 2
+	\end{aligned}\right)\left( \begin{aligned}
+		&1 & &2 & 3 \\
+		&2 & &1 & 3
+	\end{aligned}\right) \\
+	=& \left( \begin{aligned}
+		&3 & &1 & 2 \\
+		&3 & &2 & 1
+	\end{aligned}\right)\left( \begin{aligned}
+		&2 & &1 & 3 \\
+		&3 & &1 & 2
+	\end{aligned}\right)\left( \begin{aligned}
+		&1 & &2 & 3 \\
+		&2 & &1 & 3
+	\end{aligned}\right) = \left( \begin{aligned}
+		&1 & &2 & 3 \\
+		&3 & &2 & 1
+	\end{aligned}\right) = (1 \ 3).
+\end{align*}
+
+\item 
+\begin{align*}
+	(1 \ 2 \ 3)(1 \ 3 \ 4)(3 \ 2 \ 1) =& \left( \begin{aligned}
+		&1 & &2 & &3 & 4 \\
+		&2 & &3 & &1 & 4
+	\end{aligned}\right)\left( \begin{aligned}
+		&1 & &2 & &3 & 4 \\
+		&3 & &2 & &4 & 1
+	\end{aligned}\right)\left( \begin{aligned}
+		&3 & &2 & &1 & 4 \\
+		&2 & &1 & &3 & 4
+	\end{aligned}\right) \\
+	=& \left( \begin{aligned}
+		&2 & &3 & &4 & 1 \\
+		&3 & &1 & &4 & 2
+	\end{aligned}\right)\left( \begin{aligned}
+		&2 & &1 & &3 & 4 \\
+		&2 & &3 & &4 & 1
+	\end{aligned}\right)\left( \begin{aligned}
+		&3 & &2 & &1 & 4 \\
+		&2 & &1 & &3 & 4
+	\end{aligned}\right) \\
+	=& \left( \begin{aligned}
+		&3 & &2 & &1 & 4 \\
+		&3 & &1 & &4 & 2
+	\end{aligned}\right) = (1 \ 4 \ 2).
+\end{align*}
+
+\item 
+\begin{align*}
+	(1 \ 2 \ 3 \ 4)^{-1} = \left( \begin{aligned}
+		&1 & &2 & &3 & 4 \\
+		&2 & &3 & &4 & 1
+	\end{aligned}\right)^{-1} = \left( \begin{aligned}
+		&2 & &3 & &4 & 1 \\
+		&1 & &2 & &3 & 4
+	\end{aligned}\right) = (4 \ 3 \ 2 \ 1).
+\end{align*}
+
+\item 
+\begin{align*}
+	(1 \ 2 \ 4 \ 5)(4 \ 3 \ 2 \ 6) =& (5 \ 1 \ 2)(2 \ 4)(4 \ 3 \ 2)(2 \ 6) = (5 \ 1 \ 2)(4 \ 2)(2 \ 4 \ 3)(2 \ 6) \\
+	=&(5 \ 1 \ 2)(4 \ 3)(2 \ 6) = (5 \ 1 \ 2 \ 6)(4 \ 3).
+\end{align*}
+
+\item 
+\begin{align*}
+	(1 \ 2 \ 3)(4 \ 2 \ 6)(3 \ 4 \ 5 \ 6) =& (1 \ 2 \ 3)(2 \ 6 \ 4)(6 \ 3 \ 4)(4 \ 5) = (1 \ 2 \ 3)(2 \ 6 \ 4)(4 \ 6 \ 3)(4 \ 5) \\
+	=& (1 \ 2 \ 3)(2 \ 6 \ 3)(4 \ 5) = (1 \ 2 \ 3)(3 \ 2 \ 6)(4 \ 5) = (1 \ 2 \ 6)(4 \ 5).
+\end{align*}
+
+\end{enumerate}
+
+\item 写出对应下列杨表的杨算符
+\begin{enumerate}[(1)]
+\item 
+\begin{ytableau}
+1 & 2 & 3 \\
+4 \\
+\end{ytableau}
+
+\[
+	[E + (1 \ 2) + (1 \ 3) + (2 \ 3) + (1 \ 2 \ 3) + (1 \ 3 \ 2)][E - (1 \ 4)].
+\]
+
+\item 
+\begin{ytableau}
+1 & 2 \\
+3 & 4 \\
+\end{ytableau}
+
+\[
+	[E + (1 \ 2)] [E + (3 \ 4)] [E - (1 \ 3)] [E - (2 \ 4)].
+\]
+
+\item 
+\begin{ytableau}
+1 & 2 & 3 & 4 \\
+5 \\
+\end{ytableau}
+
+\begin{align*}
+	&[E + (1 \ 2) + (1 \ 3) + (1 \ 4) + (2 \ 3) + (2 \ 4) + (3 \ 4) + (1 \ 2 \ 3) + (1 \ 3 \ 2) + (1 \ 2 \ 4) + (1 \ 4 \ 2)\\
+	+& (1 \ 3 \ 4) + (1 \ 4 \ 3) + (2 \ 3 \ 4) + (2 \ 4 \ 3) + (1 \ 2 \ 3 \ 4) + (1 \ 2 \ 4 \ 3) + (1 \ 3 \ 2 \ 4) + (1 \ 3 \ 4 \ 2) \\
+	+& (1 \ 4 \ 2 \ 3) + (1 \ 4 \ 3 \ 2) + (1 \ 2)(3 \ 4) + (1 \ 3)(2 \ 4) + (1 \ 4)(2 \ 3)][E - (1 \ 5)].
+\end{align*}
+
+\end{enumerate}
+
+\item 具体写出$S_4$群恒元按杨算符的展开式。
+\begin{proof}
+恒元可以写为
+\[
+	E = \frac{A}{24} + \frac{B}{12} + \frac{C}{8}.
+\]
+其中：
+\begin{align*}
+	A =& \begin{ytableau}
+		1 & 2 & 3 & 4 
+	\end{ytableau} + 
+	\begin{ytableau}
+		1 \\
+		2 \\
+		3 \\
+		4
+	\end{ytableau} 
+	= 2[E + (1 \ 2)(3 \ 4) + (1 \ 3)(2 \ 4) + (1 \ 4)(2 \ 3) + (1 \ 2 \ 3) + (1 \ 3 \ 2) \\
+	&+ (1 \ 2 \ 4) + (1 \ 4 \ 2) + (1 \ 3 \ 4) + (1 \ 4 \ 3) + (2 \ 3 \ 4) + (2 \ 4 \ 3)]; \\
+	B =& \begin{ytableau}
+		1 & 2 \\
+		3 & 4
+	\end{ytableau} + 
+	\begin{ytableau}
+		1 & 3 \\
+		2 & 4
+	\end{ytableau}
+	= E + (1 \ 2) + (3 \ 4) + (1 \ 2)(3 \ 4) - (1 \ 3) - (2 \ 1 \ 3) - (4 \ 3 \ 1) \\
+	&- (2 \ 1 \ 4 \ 3) - (2 \ 4) - (1 \ 2 \ 4) - (3 \ 4 \ 2) - (1 \ 2 \ 3 \ 4) + (1 \ 3)(2 \ 4) + (1 \ 3 \ 2 \ 4) \\
+	&+ (3 \ 1 \ 4 \ 2) + (1 \ 4)(3 \ 2) + E + (1 \ 3) + (2 \ 4) + (1 \ 3)(2 \ 4) - (1 \ 2) - (3 \ 1 \ 2) \\
+	&- (4 \ 2 \ 1) - (3 \ 1 \ 4 \ 2) - (3 \ 4) - (1 \ 3 \ 4) - (2 \ 4 \ 3) - (1 \ 3 \ 2 \ 4) + (1 \ 2)(3 \ 4) \\
+	&+ (1 \ 2 \ 3 \ 4) + (2 \ 1 \ 4 \ 3) + (1 \ 4)(2 \ 3); \\
+	C =& \begin{ytableau}
+		1 & 2 & 3 \\
+		4 \\
+	\end{ytableau} + 
+	\begin{ytableau}
+		1 & 4 \\
+		2 \\
+		3
+	\end{ytableau} + 
+	\begin{ytableau}
+		1 & 2 & 4 \\
+		3 \\
+	\end{ytableau} + 
+	\begin{ytableau}
+		1 & 3 \\
+		2 \\
+		4
+	\end{ytableau} + 
+	\begin{ytableau}
+		1 & 3 & 4 \\
+		2 \\
+	\end{ytableau} + 
+	\begin{ytableau}
+		1 & 2 \\
+		3 \\
+		4
+	\end{ytableau} \\
+	=& 6E - 2(2 \ 3)(1 \ 4) - 2(2 \ 4)(1 \ 3) - 2(4 \ 3)(1 \ 2).
+\end{align*}
+\end{proof}
+
+\item 下列两正则杨算符乘积$\mathcal{Y}_1\mathcal{Y}_2$不为零，$R$把正则杨表$\mathcal{Y}_2$变成$\mathcal{Y}_1$，试把$R$表示成属于杨表$\mathcal{Y}_2$的横向置换$P_2$和纵向置换$Q_2$的乘积$P_2Q_2$，再表示成属于杨表$\mathcal{Y}_1$的横向置换$P_1$和纵向置换$Q_1$的乘积$P_1Q_1$.
+\[
+	\mathcal{Y}_1 = \begin{ytableau}
+		1 & 2 & 3 & 4 \\
+		5 & 6 & 7 \\
+		8 & 9
+	\end{ytableau}, \ \ 
+	\mathcal{Y}_2 = \begin{ytableau}
+		1 & 2 & 4 & 7 \\
+		3 & 6 & 9 \\
+		6 & 8
+	\end{ytableau}.
+\]
+
+\begin{proof}
+置换为：
+\begin{align*}
+	R =& \left( \begin{aligned}
+		&1 && 2 && 4 && 7 && 3 && 5 && 9 && 6 && 8 \\
+		&1 && 2 && 3 && 4 && 5 && 6 && 7 && 8 && 9
+	\end{aligned} \right) = (4 \ 3 \ 5 \ 6 \ 8 \ 9 \ 7) \\
+	=& (7 \ 4) (4 \ 3 \ 5 \ 6 \ 8 \ 9) = (7 \ 4) (3 \ 5) (5 \ 6 \ 8 \ 9 \ 4) \\
+	=& (7 \ 4) (3 \ 5) (5\ 6 \ 8 \ 9) (9 \ 4) = (7 \ 4) (3 \ 5) (9 \ 5) (5 \ 6 \ 8) (9 \ 4) \\
+	=& (7 \ 4) (3 \ 5 \ 9) (6 \ 8) (8 \ 5) (9 \ 4) = P_1Q_1.
+\end{align*}
+
+其中
+\[
+	P_1 = (7 \ 4) (3 \ 5 \ 9) (6 \ 8); \ \ Q_1 = (8 \ 5) (9 \ 4).
+\]
+
+或者
+\begin{align*}
+	R =& (4 \ 3 \ 5 \ 6 \ 8 \ 9 \ 7) \\
+	=& (4 \ 3) (3 \ 5 \ 6 \ 8 \ 9 \ 7) = (4 \ 3)(5 \ 6)(6 \ 8 \ 9 \ 7)(7 \ 3) \\
+	=& (4 \ 3)(5 \ 6)(7 \ 6)(6 \ 8 \ 9)(7 \ 3) = (4 \ 3)(5 \ 6 \ 7)(8 \ 9)(9 \ 6)(7 \ 3).
+\end{align*}
+
+其中
+\[
+	P_2 = (4 \ 3)(5 \ 6 \ 7)(8 \ 9); \ \ Q_2 = (9 \ 6)(7 \ 3).
+\]
+\end{proof}
+
+\item 用列表法计算$S_5$群生成元$(1 \ 2)$和$(1 \ 2 \ 3 \ 4 \ 5)$在不可约表示$[2,2,1]$中的表示矩阵。
+
+\begin{proof}
+正交杨算符分别为$\mathcal{Y}_1[E - (2 \ 5)], \ \mathcal{Y}_2, \ \mathcal{Y}_3, \ \mathcal{Y}_4, \ \mathcal{Y}_5$，列表法计算表示矩阵如下：
+\begin{table}[H]
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+(1 \ 2) & \begin{ytableau}
+2 & 1 \\
+3 & 4 \\
+5
+\end{ytableau} & \begin{ytableau}
+2 & 1 \\
+3 & 5 \\
+4
+\end{ytableau} & \begin{ytableau}
+2 & 3 \\
+1 & 4 \\
+5
+\end{ytableau} & \begin{ytableau}
+2 & 3 \\
+1 & 5 \\
+4
+\end{ytableau} & \begin{ytableau}
+2 & 4 \\
+1 & 5 \\
+3
+\end{ytableau} \\ \hline
+\begin{ytableau}
+1 & 2 \\
+3 & 4 \\
+5
+\end{ytableau}-\begin{ytableau}
+1 & 5 \\
+3 & 4 \\
+2
+\end{ytableau} & 1-0 & 0-0 & 1-0 & 0-0 & 0+1 \\ \hline
+\begin{ytableau}
+1 & 2 \\
+3 & 5 \\
+4
+\end{ytableau} & 0 & 1 & 0 & -1 & 1 \\ \hline
+\begin{ytableau}
+1 & 3 \\
+2 & 4 \\
+5
+\end{ytableau} & 0 & 0 & -1 & 0 & 0 \\ \hline
+\begin{ytableau}
+1 & 3 \\
+2 & 5 \\
+4
+\end{ytableau} & 0 & 0 & 0 & -1 & 0 \\ \hline
+\begin{ytableau}
+1 & 4 \\
+2 & 5 \\
+3
+\end{ytableau} & 0 & 0 & 0 & 0 & -1 \\ \hline
+\end{tabular}
+\end{table}
+\end{proof}
+
+\item 用等效方法计算$S_6$群各类在下列不可约表示中的特征标。
+
+(1) 表示$[3,2,1]$; (2) 表示$[3,3]$; (3) 表示$[2,2,2]$
+\begin{proof}
+\
+\begin{table}[H]
+\begin{tabular}{|c|c|c|c|}
+\hline
+\text{类} & [3,2,1] & [3,3] & [2,2,2] \\ \hline
+$(1^6)$ & 16 & 5 & 5 \\ \hline
+$(2,1^4)$ & 0 & 1 & -1 \\ \hline
+$(2^2,1^2)$ & 0 & 1 & 1 \\ \hline
+$(2^3)$ & 0 & -3 & 3 \\ \hline
+$(3,1^3)$ & -2 & -1 & -1 \\ \hline
+$(3,2,1)$ & 0 & 1 & -1 \\ \hline
+$(3^2)$ & -2 & 2 & 2 \\ \hline
+$(4,1^2)$ & 0 & -1 & 1 \\ \hline
+$(4,2)$ & 0 & -1 & -1 \\ \hline
+$(5,1)$ & 1 & 0 & 0 \\ \hline
+$(6)$ & 0 & 0 & 0 \\ \hline
+\end{tabular}
+\end{table}
+\end{proof}
+
+
+\item 分别写出$S_6$群相邻客体对换$P_a$在不可约表示$[3,3]$和$[2,2,2]$正交基中的实正交表示矩阵形式。因为下式两边的表示是等价的
+\[
+	[2,2,2] \simeq [1^6]\times[3,3].
+\]
+试计算它们间的相似变换矩阵$X$。
+\begin{proof}
+对应杨图$[2,2,2]$的正则杨表为：
+\[
+	\begin{ytableau}
+		1 & 2 \\
+		3 & 4 \\
+		5 & 6
+	\end{ytableau} \ \ 
+	\begin{ytableau}
+		1 & 2 \\
+		3 & 5 \\
+		4 & 6
+	\end{ytableau} \ \ 
+	\begin{ytableau}
+		1 & 3 \\
+		2 & 4 \\
+		5 & 6
+	\end{ytableau} \ \ 
+	\begin{ytableau}
+		1 & 3 \\
+		2 & 5 \\
+		4 & 6
+	\end{ytableau} \ \ 
+	\begin{ytableau}
+		1 & 4 \\
+		2 & 5 \\
+		3 & 6
+	\end{ytableau};
+\]
+
+杨图$[3,3]$的正则杨表为：
+\[
+	\begin{ytableau}
+		1 & 2 & 3 \\
+		4 & 5 & 6
+	\end{ytableau} \ \ 
+	\begin{ytableau}
+		1 & 2 & 4 \\
+		3 & 5 & 6
+	\end{ytableau} \ \ 
+	\begin{ytableau}
+		1 & 2 & 5 \\
+		3 & 4 & 6
+	\end{ytableau} \ \ 
+	\begin{ytableau}
+		1 & 3 & 4 \\
+		2 & 5 & 6
+	\end{ytableau} \ \ 
+	\begin{ytableau}
+		1 & 3 & 5 \\
+		2 & 4 & 6
+	\end{ytableau}.
+\]
+
+相邻客体对换$P_a$在表示$[2,2,2]$和$[1^6]\times [3,3]$中的表示矩阵分别为：
+\begin{table}[H]
+\begin{tabular}{|c|c|c|}
+\hline
+ & $[2,2,2]$ & $[1^6]\times[3,3]$ \\ \hline
+$P_1$ & $\left(\begin{matrix}
+	1 & 0 & 0 & 0 & 0 \\
+	0 & 1 & 0 & 0 & 0 \\
+	0 & 0 & -1 & 0 & 0 \\
+	0 & 0 & 0 & -1 & 0 \\
+	0 & 0 & 0 & 0 & -1 \\
+\end{matrix}
+\right)$ & $\left(\begin{matrix}
+	-1 & 0 & 0 & 0 & 0 \\
+	0 & -1 & 0 & 0 & 0 \\
+	0 & 0 & -1 & 0 & 0 \\
+	0 & 0 & 0 & 1 & 0 \\
+	0 & 0 & 0 & 0 & 1 \\
+\end{matrix}
+\right)$ \\ \hline
+$P_2$ & $\frac{1}{2}\left(\begin{matrix}
+	-1 & 0 & \sqrt{3} & 0 & 0 \\
+	0 & -1 & 0 & \sqrt{3} & 0 \\
+	\sqrt{3} & 0 & 1 & 0 & 0 \\
+	0 & \sqrt{3} & 0 & 1 & 0 \\
+	0 & 0 & 0 & 0 & -2 \\
+\end{matrix}
+\right)$ & $\frac{1}{2}\left(\begin{matrix}
+	-2 & 0 & 0 & 0 & 0 \\
+	0 & 1 & 0 & -\sqrt{3} & 0 \\
+	0 & 0 & 1 & 0 & -\sqrt{3} \\
+	0 & -\sqrt{3} & 0 & -1 & 0 \\
+	0 & 0 & -\sqrt{3} & 0 & -1 \\
+\end{matrix}
+\right)$ \\ \hline
+$P_3$ & $\frac{1}{3}\left(\begin{matrix}
+	3 & 0 & 0 & 0 & 0 \\
+	0 & -3 & 0 & 0 & 0 \\
+	0 & 0 & -3 & 0 & 0 \\
+	0 & 0 & 0 & -1 & \sqrt{8} \\
+	0 & 0 & 0 & \sqrt{8} & 1 \\
+\end{matrix}
+\right)$ & $\frac{1}{3}\left(\begin{matrix}
+	1 & -\sqrt{8} & 0 & 0 & 0 \\
+	-\sqrt{8} & -1 & 0 & 0 & 0 \\
+	0 & 0 & -3 & 0 & 0 \\
+	0 & 0 & 0 & -3 & 0 \\
+	0 & 0 & 0 & 0 & 3 \\
+\end{matrix}
+\right)$ \\ \hline
+$P_4$ & $\frac{1}{2}\left(\begin{matrix}
+	-1 & \sqrt{3} & 0 & 0 & 0 \\
+	\sqrt{3} & 1 & 0 & 0 & 0 \\
+	0 & 0 & -1 & \sqrt{3} & 0 \\
+	0 & 0 & \sqrt{3} & 1 & 0 \\
+	0 & 0 & 0 & 0 & -2 \\
+\end{matrix}
+\right)$ & $\frac{1}{2}\left(\begin{matrix}
+	-2 & 0 & 0 & 0 & 0 \\
+	0 & 1 & -\sqrt{3} & 0 & 0 \\
+	0 & -\sqrt{3} & -1 & 0 & 0 \\
+	0 & 0 & 0 & 1 & -\sqrt{3} \\
+	0 & 0 & 0 & -\sqrt{3} & -1 \\
+\end{matrix}
+\right)$ \\ \hline
+$P_5$ & $\left(\begin{matrix}
+	1 & 0 & 0 & 0 & 0 \\
+	0 & -1 & 0 & 0 & 0 \\
+	0 & 0 & 1 & 0 & 0 \\
+	0 & 0 & 0 & -1 & 0 \\
+	0 & 0 & 0 & 0 & -1 \\
+\end{matrix}
+\right)$ & $\left(\begin{matrix}
+	-1 & 0 & 0 & 0 & 0 \\
+	0 & -1 & 0 & 0 & 0 \\
+	0 & 0 & 1 & 0 & 0 \\
+	0 & 0 & 0 & -1 & 0 \\
+	0 & 0 & 0 & 0 & 1 \\
+\end{matrix}
+\right)$ \\ \hline
+\end{tabular}
+\end{table}
+
+两组矩阵中，对应矩阵可以通过两次变换得到，先把非对角元改号，再关于反对角线做转置。
+
+注意到$[2,2,2]$非零对角元只在$12,13,24,34,45$出现，只改变第一行、第四行符号就可以全部变号，则$X$矩阵可以写作$X = YZ$，$Y$对角元第1、4行为$-1$，其余为$1$，$Z$的反对角元全为$1$，则
+\[
+	X = \left( \begin{matrix}
+		0 & 0 & 0 & 0 & -1 \\
+		0 & 0 & 0 & 1 & 0 \\
+		0 & 0 & 1 & 0 & 0 \\
+		0 & -1 & 0 & 1 & 0 \\
+		1 & 0 & 0 & 0 & 0
+	\end{matrix} \right)
+\]
+
+满足
+\[
+	X^{-1} [2,2,2] X = [1^6]\times [3,3].
+\]
+\end{proof}
+
+\item 用立特伍德-理查森规则计算下列置换群表示外积的约化
+\begin{enumerate}[(1)]
+\item $[3,2,1] \otimes [3]$, 
+\begin{proof}
+\begin{align*}
+	\begin{ytableau}
+		\ & \ & \ \\
+		\ & \ \\
+		\ 
+	\end{ytableau} \times 
+	\begin{ytableau}
+		1 & 1 & 1
+	\end{ytableau} \ \simeq \ &
+	\begin{ytableau}
+		\ & \ & \ & 1 & 1 & 1 \\
+		\ & \ \\
+		\ 
+	\end{ytableau} \ \oplus
+	\begin{ytableau}
+		\ & \ & \ & 1 & 1 \\
+		\ & \ & 1 \\
+		\ 
+	\end{ytableau} \\ 
+	&\oplus
+	\begin{ytableau}
+		\ & \ & \ & 1 & 1 \\
+		\ & \ \\
+		\ & 1
+	\end{ytableau} \ \oplus
+	\begin{ytableau}
+		\ & \ & \ & 1 & 1 \\
+		\ & \ \\
+		\ \\
+		1
+	\end{ytableau} \\
+	&\oplus
+	\begin{ytableau}
+		\ & \ & \ & 1 \\
+		\ & \ & 1 \\
+		\ & 1
+	\end{ytableau} \ \oplus 
+	\begin{ytableau}
+		\ & \ & \ & 1 \\
+		\ & \ & 1 \\
+		\ \\
+		1
+	\end{ytableau} \\
+	&\oplus
+	\begin{ytableau}
+		\ & \ & \ & 1 \\
+		\ & \ \\
+		\ & 1 \\
+		1
+	\end{ytableau} \ \oplus
+	\begin{ytableau}
+		\ & \ & \ \\
+		\ & \ & 1 \\
+		\ & 1 \\
+		1
+	\end{ytableau}. \\
+	[3,2,1]\times[3] \simeq& [6,2,1] \oplus [5,3,1] \oplus [5,2,2] \oplus [5,2,1,1] \oplus [4,3,2] \\
+	&\oplus[4,3,1,1] \oplus[4,2,2,1] \oplus[3,3,2,1].
+\end{align*}
+
+维数验证
+\[
+	\frac{9!}{6!3!}\times16\times1 =1344=105+162+120+189+168+216+216+168.
+\]
+\end{proof}
+
+\item $[3,2] \otimes [2,1]$, 
+\begin{proof}
+\begin{align*}
+	\begin{ytableau}
+		\ & \ & \ \\
+		\ & \
+	\end{ytableau} \times
+	\begin{ytableau}
+		1 & 1 \\
+		2
+	\end{ytableau} \ \simeq \ &
+	\begin{ytableau}
+		\ & \ & \ & 1 & 1 \\
+		\ & \ & 2 
+	\end{ytableau} \oplus
+	\begin{ytableau}
+		\ & \ & \ & 1 & 1 \\
+		\ & \ \\
+		2
+	\end{ytableau} \\
+	&\oplus
+	\begin{ytableau}
+		\ & \ & \ & 1 \\
+		\ & \ & 1 & 2
+	\end{ytableau} \oplus
+	\begin{ytableau}
+		\ & \ & \ & 1 \\
+		\ & \ & 1 \\
+		2
+	\end{ytableau} \\
+	&\oplus
+	\begin{ytableau}
+		\ & \ & \ & 1 \\
+		\ & \ & 2 \\
+		1
+	\end{ytableau} \oplus
+	\begin{ytableau}
+		\ & \ & \ & 1 \\
+		\ & \ \\
+		1 & 2
+	\end{ytableau} \\
+	&\oplus
+	\begin{ytableau}
+		\ & \ & \ & 1 \\
+		\ & \ \\
+		1 \\
+		2
+	\end{ytableau} \oplus
+	\begin{ytableau}
+		\ & \ & \ \\
+		\ & \ & 1 \\
+		1 & 2
+	\end{ytableau} \\
+	& \oplus
+	\begin{ytableau}
+		\ & \ & \ \\
+		\ & \ & 1 \\
+		1 \\
+		2
+	\end{ytableau} \oplus
+	\begin{ytableau}
+		\ & \ & \ \\
+		\ & \ \\
+		1 & 1 \\
+		2
+	\end{ytableau}. \\
+	[3,2] \times [2,1] \simeq & [5,3] \oplus [5,2,1] \oplus [4,4] \oplus 2[4,3,1] \oplus [4,2,2] \\
+	&\oplus [4,2,1,1] \oplus [3,3,2] \oplus [3,3,1,1] \oplus [3,2,2,1].
+\end{align*}
+
+维数验证
+\[
+	\frac{8!}{5!3!}\times5\times2 = 560 = 28+64+14+2\times70+56+90+42+56+70.
+\]
+\end{proof}
+
+\item $[2,1] \otimes [4,2^3]$.
+\begin{proof}
+\begin{align*}
+	\begin{ytableau}
+		1 & 1 \\
+		2
+	\end{ytableau} \times 
+	\begin{ytableau}
+		\ & \ & \ & \ \\
+		\ & \ \\
+		\ & \ \\
+		\ & \ 
+	\end{ytableau} \ \simeq \ &
+	\begin{ytableau}
+		\ & \ & \ & \ & 1 & 1 \\
+		\ & \ & 2 \\
+		\ & \ \\
+		\ & \ 
+	\end{ytableau} \oplus
+	\begin{ytableau}
+		\ & \ & \ & \ & 1 & 1 \\
+		\ & \ \\
+		\ & \ \\
+		\ & \ \\
+		2
+	\end{ytableau} \\
+	&\oplus 
+	\begin{ytableau}
+		\ & \ & \ & \ & 1 \\
+		\ & \ & 1 & 2 \\
+		\ & \ \\
+		\ & \ 
+	\end{ytableau} \oplus
+	\begin{ytableau}
+		\ & \ & \ & \ & 1 \\
+		\ & \ & 1 \\
+		\ & \ & 2 \\
+		\ & \ 
+	\end{ytableau} \\
+	&\oplus
+	\begin{ytableau}
+		\ & \ & \ & \ & 1 \\
+		\ & \ & 1 \\
+		\ & \ \\
+		\ & \ \\
+		2
+	\end{ytableau} \oplus
+	\begin{ytableau}
+		\ & \ & \ & \ & 1 \\
+		\ & \ & 2 \\
+		\ & \ \\
+		\ & \ \\
+		1
+	\end{ytableau} \\
+	&\oplus
+	\begin{ytableau}
+		\ & \ & \ & \ & 1 \\
+		\ & \ \\
+		\ & \ \\
+		\ & \ \\
+		1 & 2
+	\end{ytableau} \oplus 
+	\begin{ytableau}
+		\ & \ & \ & \ & 1 \\
+		\ & \ \\
+		\ & \ \\
+		\ & \ \\
+		1 \\
+		2
+	\end{ytableau} \\
+	& \oplus
+	\begin{ytableau}
+		\ & \ & \ & \ \\
+		\ & \ & 1 & 1 \\
+		\ & \ & 2 \\
+		\ & \ 
+	\end{ytableau} \oplus
+	\begin{ytableau}
+		\ & \ & \ & \ \\
+		\ & \ & 1 & 1 \\
+		\ & \ \\
+		\ & \ \\
+		2
+	\end{ytableau} \\
+	&\oplus
+	\begin{ytableau}
+		\ & \ & \ & \ \\
+		\ & \ & 1 \\
+		\ & \ & 2 \\
+		\ & \ \\
+		1
+	\end{ytableau} \oplus
+	\begin{ytableau}
+		\ & \ & \ & \ \\
+		\ & \ & 1 \\
+		\ & \ \\
+		\ & \ \\
+		1 & 2
+	\end{ytableau} \\
+	&\oplus
+	\begin{ytableau}
+		\ & \ & \ & \ \\
+		\ & \ & 1 \\
+		\ & \ \\
+		\ & \ \\
+		1 \\
+		2
+	\end{ytableau} \oplus
+	\begin{ytableau}
+		\ & \ & \ & \ \\
+		\ & \ \\
+		\ & \ \\
+		\ & \ \\
+		1 & 1 \\
+		2
+	\end{ytableau}. \\
+	[2,1]\times[4,2,2,2] \simeq& [6,3,2,2] \oplus [6,2,2,2,1] \oplus [5,4,2,2] \oplus [5,3,3,2] \\
+	&\oplus 2[5,3,2,2,1] \oplus [5,2,2,2,2] \oplus [5,2,2,2,1,1] \oplus [4,4,3,2] \\
+	&\oplus [4,4,2,2,1] \oplus [4,3,3,2,1] \oplus [4,3,2,2,2] \\
+	&\oplus [4,3,2,2,1,1] \oplus [4,2,2,2,2,1].
+\end{align*}
+
+维数验证
+\begin{align*}
+	\frac{13!}{3!10!}\times2\times300 =& 171600 = 12012 + 9009 + 12870 + 11583 + 2\times 21450 + 5005 \\
+	& + 10296 + 8580 + 12870 + 15015 + 8580 + 17160 + 5720.
+\end{align*}
+\end{proof}
+
+\end{enumerate}
+
+\item 用立特伍德-查利森规则计算，$S_6$群下列不可约表示关于子群$S_3\otimes S_3$的分导表示，按子群不可约表示的约化
+\begin{enumerate}[(1)]
+\item $[4,2]$,
+\begin{proof}
+\[
+	\begin{ytableau}
+		\ & \ & \ & 1 \\
+		1 & 1 
+	\end{ytableau} \  \oplus
+	\begin{ytableau}
+		\ & \ & \ & 1 \\
+		1 & 2 
+	\end{ytableau} \ \oplus
+	\begin{ytableau}
+		\ & \ & 1 & 1 \\
+		\ & 1 
+	\end{ytableau} \ \oplus
+	\begin{ytableau}
+		\ & \ & 1 & 1 \\
+		\ & 2 
+	\end{ytableau}.
+\]
+
+\[
+	[4,2] \simeq [3]\times[3] \oplus [3] \times [2,1] \oplus [2,1] \times [3] \oplus [2,1]\times[2,1].
+\]
+
+维数验证：
+\[
+	9 = 1\times 1 + 1\times 2 + 2\times 1 + 2\times 2.
+\]
+\end{proof}
+
+\item $[2,2,1,1]$,
+\begin{proof}
+\[
+	\begin{ytableau}
+		\ & \ \\
+		\ & 1 \\
+		1 \\
+		2
+	\end{ytableau} \ \oplus
+	\begin{ytableau}
+		\ & \ \\
+		\ & 1 \\
+		2 \\
+		3
+	\end{ytableau} \ \oplus
+	\begin{ytableau}
+		\ & 1 \\
+		\ & 2 \\
+		\ \\
+		1
+	\end{ytableau} \ \oplus
+	\begin{ytableau}
+		\ & 1 \\
+		\ & 2 \\
+		\ \\
+		3
+	\end{ytableau}.
+\]
+\[
+	[2,2,1,1] \simeq [2,1] \times [2,1] \oplus [2,1] \times [1,1,1] \oplus [1,1,1] \times [2,1] \oplus [1,1,1] \times [1,1,1].
+\]
+
+维数验证
+\[
+	 9 = 2 \times 2 + 2 \times 1 + 1 \times 2 + 1 \times 1.
+\]
+\end{proof}
+
+\item $[3,3]$.
+\begin{proof}
+\[
+	\begin{ytableau}
+		\ & \ & \ \\
+		1 & 1 & 1 
+	\end{ytableau} \ \oplus
+	\begin{ytableau}
+		\ & \ & 1 \\
+		\ & 1 & 2 
+	\end{ytableau}.
+\]
+\[
+	[3,3] \simeq [3] \times [3] \oplus [2,1] \times [2,1]
+\]
+
+维数验证
+\[
+	5 = 1 \times 1 + 2 \times 2.
+\]
+\end{proof}
+
+\end{enumerate}
+
+
+\end{enumerate}
+
+\end{document}
+
+%杨图例子
+\ytableausetup{boxsize=1.5em}
+\begin{ytableau}
+1 & 2 & 3 \\
+4 & 5 \\
+6
+\end{ytableau}
